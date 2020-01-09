@@ -1,19 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
+export default class App extends React.Component {
+  state = {item: null}
+  render () {
+    return (
+      <View style={styles.container}>
+        <Text>{this.state.item || 'Keine Einträge im Tagebuch'}</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Tagebucheintrag erstellen"
+          returnKeyType="done"
+          onSubmitEditing={event => this.setState({ item: event.nativeEvent.text})}
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 40
   },
 });
